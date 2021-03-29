@@ -7,21 +7,16 @@ router.get('/categories', async function(req, res, next) {
     res.json(categories);
 });
 
-router.get('/categories/:categoryId/questions/:questionId/answers', async function(req, res, next) {
-    let answers = await Answer.findAll({where: {questionId: req.params.questionId}});
-    res.json(answers);
-});
-
-router.get('/categories/:categoryId/questions', async function(req, res, next) {
-    let questions = await Question.findAll({where: {categoryId: req.params.categoryId}, include: [{model: Answer}]});
-    res.json(questions);
-});
-
 router.post('/categories/:categoryId/questions', async function(req, res, next) {
     let body = req.body;
     body.categoryId = req.params.categoryId;
     let question = await Question.create(body);
     res.json(question);
+});
+
+router.get('/categories/:categoryId/questions', async function(req, res, next) {
+    let questions = await Question.findAll({where: {categoryId: req.params.categoryId}, include: [{model: Answer}]});
+    res.json(questions);
 });
 
 router.post('/categories/:categoryId/questions/:questionId/answers', async function(req, res, next) {
@@ -31,6 +26,10 @@ router.post('/categories/:categoryId/questions/:questionId/answers', async funct
     res.json(answer);
 });
 
+router.get('/categories/:categoryId/questions/:questionId/answers', async function(req, res, next) {
+    let answers = await Answer.findAll({where: {questionId: req.params.questionId}});
+    res.json(answers);
+});
 
 
 module.exports = router;
