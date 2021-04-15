@@ -31,5 +31,10 @@ router.get('/categories/:categoryId/questions/:questionId/answers', async functi
     res.json(answers);
 });
 
+//Delete a question
+router.delete('/categories/:categoryId/questions/:questionId', async function(req, res, next) {
+    Question.destroy({where: {id: req.params.questionId}});
+    res.json({success:true});
+});
 
 module.exports = router;
