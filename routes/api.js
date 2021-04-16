@@ -7,6 +7,7 @@ router.get('/categories', async function(req, res, next) {
     res.json(categories);
 });
 
+//create a question
 router.post('/categories/:categoryId/questions', async function(req, res, next) {
     let body = req.body;
     body.categoryId = req.params.categoryId;
@@ -19,6 +20,7 @@ router.get('/categories/:categoryId/questions', async function(req, res, next) {
     res.json(questions);
 });
 
+//create an answer
 router.post('/categories/:categoryId/questions/:questionId/answers', async function(req, res, next) {
     let body = req.body;
     body.questionId = req.params.questionId;
