@@ -60,10 +60,9 @@ router.post('/categories/:categoryId/questions', async function(req, res, next) 
     res.json(question);
 });
 
-// router.get('/categories/:categoryId/questions', async function(req, res, next) {
-router.get('/categories/:categoryId/users/:userId/questions', async function(req, res, next) {
-    console.log('req.params.userId', req.params.userId)
-    let questions = await Question.findAll({where: {categoryId: req.params.categoryId}, include: [{model: Answer}]});
+router.get('/categories/:categoryId/questions', async function(req, res, next) {
+    console.log('req.query.userId', req.query.userId)
+    let questions = await Question.findAll({where: {categoryId: req.params.categoryId, userId: req.query.userId}, include: [{model: Answer}]});
     res.json(questions);
 });
 
